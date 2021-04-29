@@ -90,7 +90,7 @@
             }
             var json = toJSONString(this);
             $.ajax({
-            url:"http://25.81.215.48:8080/cuenta/actualizar",
+            url:"http://25.81.215.48:8081/cuenta/actualizar",
             type:"PUT",
             data:json,
             dataType:"json",
@@ -105,7 +105,7 @@
 
     $('#salir').click(function(){
         localStorage.removeItem('cuenta');
-        loation.reload();
+        location.href = "index.php";
     });
 
  });

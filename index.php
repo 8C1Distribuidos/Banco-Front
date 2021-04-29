@@ -49,22 +49,23 @@ $(document).on('submit', '#login',function(e){
         //POST
         console.log(json);
         $.ajax({
-            url:"http://25.81.215.48:8080/cuenta/datos",
+            url:"http://25.81.215.48:8081/cuenta/datos",
             type:"POST",
             data:json,
             dataType:"json",
             contentType:"application/json",
-            success:function(data)
-            {
-              if(data!=null){
-                localStorage.setItem('cuenta', JSON.stringify(data));
-                console.log(data);
-                location.href = "profile.php"
-              }else{
+            statusCode: {
+              422: function(responseObject, textStatus, jqXHR) {
                 $("#alerta").html("");
                 var alerta = "<div class='alert alert-danger' id ='alert' role='alert'>Credenciales incorrectas</div>";
                 $("#alerta").append(alerta);
               }
+          },
+            success:function(data)
+            {
+                localStorage.setItem('cuenta', JSON.stringify(data));
+                console.log(data);
+                location.href = "profile.php"
             }
         });
 
